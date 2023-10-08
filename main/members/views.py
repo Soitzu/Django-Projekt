@@ -46,7 +46,3 @@ def register_user(request):
     return render(request, "authenticate/register.html", {
         'form': form,
     })
-
-
-def test_page(request):
-    return render(request, 'authenticate/login_page.html', {})
