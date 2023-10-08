@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Show Reports</title>
+{% endblock %}
+
+
+{% block content %}
+    <div class="reports">
+        <table>
+            <tr>
+                <th>ST:</th>
+                <th class="description">Description:</th>
+                <th>date:</th>
+            </tr>
+            {% for x in all_reports %}
+            <tr>      
+                <td>{{ x.stnumber }}</td>
+                <td class="text">{{ x.text }}</td>
+                <td>example date</td>   
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+
+
+
+
+

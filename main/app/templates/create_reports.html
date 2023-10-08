@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title-name %}
+    <title>Create Report</title>
+{% endblock %}
+
+{% block title %}
+<h1 style="text-align:center">Creating Report</h1>
+<br>
+{% endblock %}
+
+{% block content %}
+<div class="container" style="text-align: center">
+<form method="post">
+    {% csrf_token %}
+   <p><label for="stnumber">ST Nummer: </label></p>
+    <input type="number" name="stnumber">
+    <br><br>
+    <div class="form-group">
+        <label for="description">Beschreibung</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+      </div>
+    <br><br>
+    <label for="current_user">User: </label>
+    <select class="form-select" aria-label="Default select example">
+        <option selected value="{{ user }}" >{{ user }}</option>
+    </select>
+    <br>
+    <br>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+</div>
+{% endblock %}

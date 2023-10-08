@@ -12,18 +12,20 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+            messages.success(
+                request, ("Logged in Successfully!"))
             return redirect('home')
         else:
             messages.success(
                 request, ("There was an Error loggin in, try again"))
             return redirect('login')
     else:
-        return render(request, "authenticate/login1.html", {})
+        return render(request, "authenticate/login_page.html", {})
 
 
 def logout_user(request):
     logout(request)
-    messages.success(request, ("You were logged out"))
+    # messages.success(request, ("You were logged out"))
     return redirect("home")
 
 
@@ -44,3 +46,7 @@ def register_user(request):
     return render(request, "authenticate/register.html", {
         'form': form,
     })
+
+
+def test_page(request):
+    return render(request, 'authenticate/login_page.html', {})

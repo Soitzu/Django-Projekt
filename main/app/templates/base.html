@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <title>Document</title>
+    {% block title-name %}
+    {% endblock %}
 </head>
 <body>
 
@@ -23,9 +24,9 @@
   
     
         <div class="sidebar">
-            <a href="">About</a>
-            <a href="">Services</a>
-            <a href="">Clients</a>
+            <a href="{% url 'report' %}">Create Report</a>
+            <a href="{% url 'show_reports' %}">All Reports</a>
+            <a href="{% url 'my_reports' %}">My Reports</a>
             <a href="">Contact</a>
           </div>
 
@@ -38,6 +39,9 @@
               </div>
             {% endfor%}
         {% endif %}
+
+    {% block title %}
+    {% endblock %}
 
     {% block content %}
     {% endblock %}
@@ -55,13 +59,17 @@
     .main {
     margin-left: 160px; /* Same as the width of the sidebar */
     padding: 0px 10px;
-    margin-top: 10px;
+    margin-top: 89px;
     }
 
     .head {
     overflow: hidden;
     background-color: #f1f1f1;
     padding: 20px 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 2;
     }
 
     .head a.logo {
@@ -135,6 +143,32 @@
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
 }
+.form-select{
+  text-align: center;
+    }
 
-   
+  .reports {
+    text-align: center;
+    list-style-type: none;
+    border-collapse: collapse;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    padding: 10px;
+  }
+
+  .reports td, th {
+  border: 1px solid #dddddd;
+  padding: 8px;
+  
+}
+
+.reports table {
+ min-width: 100%;
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+
 </style>
