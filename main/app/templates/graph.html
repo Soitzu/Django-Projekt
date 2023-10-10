@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title-name %}
+    <title>Graph</title>
+{% endblock %}
+
+{% block content %}
+    <img src="data:image/png;base64,{{ graph }}" alt="Matplotlib Graph" class="blog-image">
+{% endblock %}

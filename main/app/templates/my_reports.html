@@ -14,13 +14,15 @@
             <tr>
                 <th>ST:</th>
                 <th class="description">Description:</th>
-                <th>date:</th>
+                <th>Date:</th>
+                <th>Delete</th>
             </tr>
             {% for x in my_reports %}
             <tr>      
                 <td>{{ x.stnumber }}</td>
                 <td class="text">{{ x.text }}</td>
-                <td>example date</td>  
+                <td>{{ x.date }}</td>
+                <td><a href="{% url 'delete_report' x.id %}"type="button" class="btn btn-danger">Delete</a></td>
             </tr>
             {% endfor %}
         </table>
