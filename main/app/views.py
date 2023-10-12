@@ -24,15 +24,20 @@ def home(request):
     # End
 
     if request.user.is_authenticated:
-        my_todos = Todo.objects.all().values()
+        my_todos = Todo.objects.filter(user=request.user)
         if request.method == "POST":
             text = request.POST['description']
-            create_todo = Todo(
-                text=text, hour=hour, minute=minute, second=second, user=current_user
-            )
-            create_todo.save()
-            messages.success(request, ("Todo saved successfully"))
-            return redirect('home')
+            if text == '':
+                messages.success(
+                    request, ("Nothing is not allowed! You have enough things to do ..."))
+                return redirect('home')
+            else:
+                create_todo = Todo(
+                    text=text, hour=hour, minute=minute, second=second, user=current_user
+                )
+                create_todo.save()
+                messages.success(request, ("Todo saved successfully"))
+                return redirect('home')
 
         return render(request, "home.html", {
             'log_user': log_user,
@@ -106,3 +111,21 @@ def graph_view(request):
     graph = get_graph()
 
     return render(request, 'graph.html', {'graph': graph})
+
+
+def delete_todo(request, event_id):
+    my_todo = Todo.objects.filter(pk=event_id)
+    my_todo.delete()
+    return redirect('home')
+
+
+def download_todo(request):
+    todos = Todo.objects.all()
+
+    content = ""
+    for todo in todos:
+        content += f"Date: {todo.date}, Task: {todo.text}\n"
+
+    response = HttpResponse(content, content_type='text/plain')
+    response['Content-Disposition'] = 'attachment; filename="todos.txt"'
+    return response

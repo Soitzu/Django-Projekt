@@ -1,8 +1,15 @@
 {% extends "base.html" %}
+{% block header %}
+  <a href="{% url 'download_todo' %}">Print Todos</a>
+{% endblock %}
+
+
 
 {% block title-name %}
     <title>Home</title>
 {% endblock %}
+
+
 
 {% block content %}
 <h1 style="text-align:center">Welcome {{ log_user }} !</h1>
@@ -14,20 +21,23 @@
     <button class="btn btn-primary" type="submit" id="button-addon2">Button</button>
   </div>
 </form>
-
   <br>
 <h2>Todos:</h2>
-<hr>
-<ul class="list-group">
-    {% for x in my_todos %}
-    {% if hour > x.hour|add:"1" %}
-    <li class="list-group-item list-group-item-danger">{{ x.text }}</li>
-    {% else %}
-    <li class="list-group-item list-group-item-primary">{{ x.text }}</li>
-    {% endif %}
-    <li class="list-group-item list-group-item-info">{{ x.date}}</li>
-    <hr>
-    {% endfor %}
 
-</ul>
+<div class="list-group">
+    {% for x in my_todos %}
+    <!--<li class="list-group-item list-group-item-primary"><div class="vertical-line">{{ x.text }}</div></li>
+    <li class="list-group-item list-group-item-info">{{ x.date }}</li>
+    <hr>-->
+    <table class="home-table">
+      <tr class="list-group-item list-group-item-primary">
+        <th class="left-column">{{ x.date }} : </th>
+        <th class="variable-column">{{ x.text }}</th>
+        <th ><a href="{% url 'delete_todo' x.id %}"type="button" class="btn btn-danger">Delete</a></th>
+      </tr>
+      <hr>
+      {% endfor %}
+      
+
+    </div>
 {% endblock %}
