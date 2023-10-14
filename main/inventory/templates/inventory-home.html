@@ -1,14 +1,12 @@
-{% extends "base.html" %}
+{% extends "inventory-base.html" %}
+
 {% block header %}
   <a href="{% url 'download_todo' %}">Print Todos</a>
 {% endblock %}
 
-
-
 {% block title-name %}
-    <title>Report - Home</title>
+    <title>Inventory - Home</title>
 {% endblock %}
-
 
 
 {% block content %}
@@ -26,9 +24,6 @@
 
 <div class="list-group">
     {% for x in my_todos %}
-    <!--<li class="list-group-item list-group-item-primary"><div class="vertical-line">{{ x.text }}</div></li>
-    <li class="list-group-item list-group-item-info">{{ x.date }}</li>
-    <hr>-->
     <table class="home-table">
       <tr class="list-group-item list-group-item-primary">
         <th class="left-column">{{ x.date }} : </th>

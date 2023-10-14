@@ -1,0 +1,44 @@
+{% extends "inventory-base.html" %}
+
+
+{% block title-name %}
+    <title>Add Device</title>
+{% endblock %}
+
+{% block title %}
+<h1 style="text-align:center">Adding Device</h1>
+<br>
+{% endblock %}
+
+
+{% block content %}
+
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="test">
+        <h2>
+            <label for="model">Modell:</label>
+        </h2>
+        <input class="form-control" type="text" placeholder="Modell" name="model" aria-label="default input example">
+        <h2>
+            <label for="serialnumber">Serialnumber:</label>
+        </h2>
+        <input class="form-control" type="text" placeholder="Serialnumber" name="serialnumber" aria-label="default input example">
+        <h2>
+            <label for="status">Status:</label>
+        </h2>
+        <select name="statusname" class="form-select form-select-md" aria-label=".form-select-sm example">
+            <option selected>Open to select Status</option>
+            {% for x in all_status %}
+            <option value="{{ x.statusname }}">{{ x.statusname }}</option>
+            {% endfor %}
+          </select>
+          <button style="margin-top: 20px; width: 100px;" class="btn btn-primary" type="submit" id="button-addon2">Add</button>
+        </div>
+    </form>
+
+
+
+
+{% endblock %}

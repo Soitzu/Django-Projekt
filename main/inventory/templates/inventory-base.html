@@ -11,8 +11,8 @@
 <body>
 
         <div class="head">
-            <a href="{% url 'home' %}" class="logo">Home</a>
-            <a href="{% url 'inventory-home' %}" class="logo">Inventory</a>
+            <a href="{% url 'inventory-home' %}" class="logo">Home</a>
+            <a href="{% url 'home' %}" class="logo">Reports</a>
             <div class="head-right">
                 {% if user.is_authenticated %}
                   {% block header %}
@@ -27,10 +27,10 @@
   
     
         <div class="sidebar">
-            <a href="{% url 'report' %}">Create Report</a>
-            <a href="{% url 'show_reports' %}">All Reports</a>
-            <a href="{% url 'my_reports' %}">My Reports</a>
-            <a href="{% url 'graph' %}">Graphs</a>
+            <a href="{% url 'create_status' %}">Create Status</a>
+            <a href="{% url 'add_device' %}">Add Device</a>
+            <a href="#">All Devices</a>
+            <a href="#">All People</a>
           </div>
 
     <div class="main">
@@ -146,11 +146,8 @@
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
 }
-.form-select{
-  text-align: center;
-    }
 
-  .reports {
+.reports {
     text-align: center;
     list-style-type: none;
     border-collapse: collapse;
@@ -195,17 +192,27 @@ tr:nth-child(even) {
 }
 
 .form-control {
-  width: 100%;
-  text-align: center;
-  align-items: center;
+    width: 40%;
+    text-align: center;
+    align-items: center;
 }
 
-.container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  width: 40%;
+.test {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
+
+.text input, label {
+    margin: 10px;
+}
+
+.form-select {
+    width: 40%;
+    text-align: center;
+    align-items: center;
+}
+
 
 
 </style>

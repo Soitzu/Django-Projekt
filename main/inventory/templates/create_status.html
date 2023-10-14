@@ -1,0 +1,25 @@
+{% extends "inventory-base.html" %}
+
+
+{% block title-name %}
+    <title>Create Status</title>
+{% endblock %}
+
+{% block title %}
+<h1 style="text-align:center">Creating Status</h1>
+<br>
+{% endblock %}
+
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="test">
+    <h2>
+        <label for="statusname">Status:</label>
+    </h2>
+    <input class="form-control" type="text" placeholder="Status" name="statusname" aria-label="default input example">
+      <button style="margin-top: 20px; width: 100px;" class="btn btn-primary" type="submit" id="button-addon2">Add</button>
+    </div>
+</form>
+{% endblock %}
