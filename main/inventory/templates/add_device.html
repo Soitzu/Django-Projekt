@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block title %}
-<h1 style="text-align:center">Adding Device</h1>
+<h1 style="text-align:center">New Device</h1>
 <br>
 {% endblock %}
 
@@ -29,7 +29,7 @@
             <label for="status">Status:</label>
         </h2>
         <select name="statusname" class="form-select form-select-md" aria-label=".form-select-sm example">
-            <option selected>Open to select Status</option>
+            <option selected value="nothing">Open to select Status</option>
             {% for x in all_status %}
             <option value="{{ x.statusname }}">{{ x.statusname }}</option>
             {% endfor %}

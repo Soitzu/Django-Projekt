@@ -26,7 +26,8 @@ class Person(models.Model):
     fname = models.CharField(max_length=50)
     lname = models.CharField(max_length=50)
     stnumber = models.IntegerField()
-    device = models.ForeignKey(Device, on_delete=models.CASCADE, null=True)
+    device = models.ForeignKey(
+        Device, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return "ST: " + str(self.stnumber) + " | " + str(self.lname) + ", " + str(self.fname)

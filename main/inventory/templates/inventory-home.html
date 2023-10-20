@@ -28,7 +28,7 @@
       <tr class="list-group-item list-group-item-primary">
         <th class="left-column">{{ x.date }} : </th>
         <th class="variable-column">{{ x.text }}</th>
-        <th ><a href="{% url 'delete_todo' x.id %}"type="button" class="btn btn-danger">Delete</a></th>
+        <th><a href="{% url 'delete_todo' x.id %}"type="button" class="btn btn-danger">Delete</a></th>
       </tr>
       <hr>
       {% endfor %}

@@ -1,0 +1,33 @@
+{% extends "inventory-base.html" %}
+
+
+{% block title-name %}
+    <title>Give Device</title>
+{% endblock %}
+
+{% block title %}
+<h1 style="text-align:center">Adding Device</h1>
+<br>
+{% endblock %}
+
+
+{% block content %}
+
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="test">
+            <select name="person" class="form-select form-select-md" aria-label=".form-select-sm example">
+                <option selected value="nothing">Open to select Person</option>
+                {% for x in all_person %}
+                <option value="{{ x.id }}">{{ x.fname }}</option>
+                {% endfor %}
+              </select>
+            <button style="margin-top: 20px; width: 100px;" class="btn btn-primary" type="submit" id="button-addon2">Save</button>
+        </div>
+    </form>
+
+
+
+
+{% endblock %}

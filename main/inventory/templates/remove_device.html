@@ -1,0 +1,29 @@
+{% extends "inventory-base.html" %}
+
+
+{% block title-name %}
+    <title>Remove Device</title>
+{% endblock %}
+
+{% block title %}
+<h1 style="text-align:center">Removing Device</h1>
+<br>
+{% endblock %}
+
+
+{% block content %}
+
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="test">
+            
+            <input type="text" value="{{ current_device }}" disabled>
+            <button style="margin-top: 20px; width: 100px;" class="btn btn-primary" type="submit" id="button-addon2">Save</button>
+        </div>
+    </form>
+
+
+
+
+{% endblock %}

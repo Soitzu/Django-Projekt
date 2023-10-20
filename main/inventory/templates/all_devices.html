@@ -1,0 +1,42 @@
+{% extends 'inventory-base.html' %}
+
+{% block title %}
+    <title>All Devices</title>
+{% endblock %}
+
+
+{% block content %}
+    <div class="reports">
+        <table>
+            <tr>
+                <th>Add</th>
+                <th>Datum:</th>
+                <th>Modell:</th>
+                <th class="description">Seriennummer:</th>
+                <th>Status:</th>
+                <th>Delete</th>
+            </tr>
+            {% for x in all_devices %}
+            <tr>
+                <td>
+                    {% if x.status.statusname == "Vergeben"  %}
+                            <a href="{% url 'remove_device' x.id %}" type="button" class="btn btn-secondary">Add</a>
+                        {% else %}
+                            <a href="{% url 'give_device' x.id %}" type="button" class="btn btn-success">Add</a>
+                        {% endif %}
+                    </td>
+                <td>{{ x.date }}</td>      
+                <td>{{ x.model }}</td>
+                <td class="text">{{ x.serialnumber }}</td>
+                <td>{{ x.status.statusname }}</td>   
+                <td><a href="{% url 'delete_device' x.id %}"type="button" class="btn btn-danger">Delete</a></td>    
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+
+
+
+
+
