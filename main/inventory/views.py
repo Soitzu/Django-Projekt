@@ -151,3 +151,8 @@ def remove_device(request, event_id):
         })
     else:
         return redirect('login')
+
+
+def jsonify_test(request):
+
+    return jsonify
