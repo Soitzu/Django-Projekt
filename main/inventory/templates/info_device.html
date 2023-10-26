@@ -1,0 +1,52 @@
+{% extends 'inventory-base.html' %}
+
+{% block title %}
+    <title>Device Info</title>
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+<div class="header">
+    <h1>Information about</h1>
+    <h1>this device</h1>
+
+    
+  </div>
+  <div class="row1-container">
+    <div class="box box-down cyan">
+      <h2><b>Serialnumber</b></h2>
+      <h4>{{ this_device.serialnumber }}</h4>
+      <img src="https://assets.codepen.io/2301174/icon-supervisor.svg" alt="">
+    </div>
+
+    <div class="box red">
+      <h2><b>Model</b></h2>
+      <h4>{{ this_device.model }}</h4>
+      <img src="https://assets.codepen.io/2301174/icon-team-builder.svg" alt="">
+    </div>
+
+    <div class="box box-down blue">
+      <h2><b>Status</b></h2>
+      <h4>{{ this_device.status.statusname }}</h4>
+      <img src="https://assets.codepen.io/2301174/icon-calculator.svg" alt="">
+    </div>
+  </div>
+  <div class="row2-container">
+    <div class="box orange">
+      <h2><b>Date</b></h2>
+      <h4>{{ this_device.date }}</h4>
+      <img src="https://assets.codepen.io/2301174/icon-karma.svg" alt="">
+    </div>
+  </div>
+  <footer>
+    <p class="attribution">
+      EIN ZURÜCK Button
+    </a>
+    </p>
+  </footer>
+
+{% endblock %}

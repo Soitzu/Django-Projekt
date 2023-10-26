@@ -27,7 +27,7 @@
                     </td>
                 <td>{{ x.date }}</td>      
                 <td>{{ x.model }}</td>
-                <td class="text">{{ x.serialnumber }}</td>
+                <td class="text"><a href="{% url 'info_device' x.id %}">{{ x.serialnumber }}</a></td>
                 <td>{{ x.status.statusname }}</td>   
                 <td><a href="{% url 'delete_device' x.id %}" style="width: 80px;" type="button" class="btn btn-danger">Delete</a></td>    
             </tr>

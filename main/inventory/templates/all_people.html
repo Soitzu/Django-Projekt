@@ -1,0 +1,38 @@
+{% extends 'inventory-base.html' %}
+
+{% block title %}
+    <title>All Devices</title>
+{% endblock %}
+
+
+{% block content %}
+    <div class="reports">
+        <table>
+            <tr>
+                <th>ST:</th>
+                <th>First Name:</th>
+                <th class="description">Last Name:</th>
+                <th>Device:</th>
+                <th>Delete</th>
+            </tr>
+            {% for x in all_people %}
+            <tr>
+                <td>{{ x.stnumber }}</td>      
+                <td>{{ x.fname }}</td>
+                <td class="text">{{ x.lname }}</td>
+                {% if x.device.serialnumber == false %}
+                <td>none</td>
+                {% else %}
+                <td>{{ x.device.serialnumber }}</td>
+                {% endif %}
+                <td><a href="{% url 'delete_people' x.id %}" style="width: 80px;" type="button" class="btn btn-danger">Delete</a></td>    
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+
+
+
+
+

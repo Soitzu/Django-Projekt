@@ -17,9 +17,15 @@
     <form method="post">
         {% csrf_token %}
         <div class="test">
-            
-            <input type="text" value="{{ current_device }}" disabled>
-            <button style="margin-top: 20px; width: 100px;" class="btn btn-primary" type="submit" id="button-addon2">Save</button>
+            <h2>
+                <label for="device">Device</label>
+            </h2>
+            <input class="form-control" type="text" value="{{ current_device }}" name="device" aria-label="default input example" disabled>
+            <h2>
+                <label for="owner">Device Owner</label>
+            </h2>    
+            <input class="form-control" type="text" value="{{ current_owner }}" name="owner" aria-label="default input example" disabled>
+            <button style="margin-top: 20px; width: 100px;" class="btn btn-primary" type="submit" id="button-addon2">Remove</button>
         </div>
     </form>
 

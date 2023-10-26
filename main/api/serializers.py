@@ -1,8 +1,9 @@
 from rest_framework import serializers
 from inventory.models import Device
+from app.models import Todo
 
 
-class ItemSerializer(serializers.ModelSerializer):
+class TodoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Device
+        model = Todo
         fields = '__all__'

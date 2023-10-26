@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse
 from django.contrib.auth.models import User
 from .models import Report, Todo
 from django.contrib import messages
 from datetime import date, datetime
+from django.views import View
+import os
 # Create your views here.
 
 from .graph import get_graph
