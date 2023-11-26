@@ -4,14 +4,20 @@ from django.contrib import messages
 from datetime import date, datetime
 from app.models import Report, Todo
 from .models import Status, Person, Device, User
+from django.conf import settings
 import mimetypes
 import os
+from io import BytesIO
+import base64
+
+# qr codes
+import segno
 
 # Create your views here.
 
 
 def inventory_home(request):
-    # Get current Username and print it out to Welcome him
+    # Get current Username and print Welcome
     current_user = request.user
     log_user = str(current_user)
     log_user = log_user.capitalize()
@@ -31,7 +37,7 @@ def inventory_home(request):
             if text == '':
                 messages.success(
                     request, ("Nothing is not allowed! You have enough things to do ..."))
-                return redirect('home')
+                return redirect('inventory-home')
             else:
                 create_todo = Todo(
                     text=text, hour=hour, minute=minute, second=second, user=current_user
@@ -95,11 +101,79 @@ def create_device(request):
 
 def all_devices(request):
     if request.user.is_authenticated:
-        all_devices = Device.objects.all()
+        if request.method == "POST":
+            drop_filter = request.POST['drop_filter']
 
-        return render(request, 'all_devices.html', {
-            'all_devices': all_devices,
-        })
+            def filter_case(answer):
+                filtered = request.POST['search']
+                if answer == 'model':
+                    return Device.objects.all().filter(
+                        model__icontains=filtered).order_by('date')
+                if answer == 'serialnumber':
+                    return Device.objects.all().filter(
+                        serialnumber__icontains=filtered).order_by('date')
+                if answer == 'date':
+                    return Device.objects.all().filter(
+                        date__icontains=filtered).order_by('date')
+                if answer == 'status':
+                    return Device.objects.all().filter(
+                        status__statusname__icontains=filtered).order_by('date')
+                if answer == 'nothing':
+                    messages.success(
+                        request, ("Please choose a Filteroption!"))
+                    return Device.objects.all().order_by('date')
+
+            all_devices = filter_case(drop_filter)
+            return render(request, 'all_devices.html', {
+                'all_devices': all_devices,
+            })
+        else:
+            print("blablaelse")
+            all_devices = Device.objects.all().order_by('date')
+
+            return render(request, 'all_devices.html', {
+                'all_devices': all_devices,
+            })
+    else:
+        return redirect('login')
+
+
+def all_people(request):
+    if request.user.is_authenticated:
+
+        if request.method == "POST":
+            drop_filter = request.POST['drop_filter']
+
+            def filter_case(answer):
+                filtered = request.POST['search']
+                if answer == 'fname':
+                    return Person.objects.all().filter(
+                        fname__icontains=filtered).order_by('stnumber')
+                if answer == 'lname':
+                    return Person.objects.all().filter(
+                        lname__icontains=filtered).order_by('stnumber')
+                if answer == 'stnumber':
+                    return Person.objects.all().filter(
+                        stnumber__icontains=filtered).order_by('stnumber')
+                if answer == 'device':
+                    return Person.objects.all().filter(
+                        device__serialnumber__icontains=filtered).order_by('stnumber')
+                if answer == 'nothing':
+                    messages.success(
+                        request, ("Please choose a Filteroption!"))
+                    return Person.objects.all().order_by('stnumber')
+
+            all_people = filter_case(drop_filter)
+            return render(request, 'all_people.html', {
+                'all_people': all_people,
+            })
+        else:
+            print("blablaelse")
+            all_people = Person.objects.all().order_by('stnumber')
+
+            return render(request, 'all_people.html', {
+                'all_people': all_people,
+            })
     else:
         return redirect('login')
 
@@ -161,9 +235,9 @@ def remove_device(request, event_id):
         return redirect('login')
 
 
-def all_people(request):
+def order_people(request):
     if request.user.is_authenticated:
-        all_people = Person.objects.all()
+        all_people = Person.objects.all().order_by('stnumber')
 
         return render(request, 'all_people.html', {
             'all_people': all_people,
@@ -217,9 +291,20 @@ def create_people(request):
 def info_device(request, event_id):
     if request.user.is_authenticated:
         this_device = Device.objects.get(pk=event_id)
+        print(this_device.serialnumber)
+        qrcode = segno.make(this_device.serialnumber)
+        qr_bytes = BytesIO()
+        # Du kannst hier 'png' durch andere unterstützte Formate ersetzen
+        qrcode.save(qr_bytes, kind='png')
+
+        # Konvertiere BytesIO in base64, um es im HTML-Bild-Tag anzuzeigen
+        qr_base64 = base64.b64encode(qr_bytes.getvalue()).decode('utf-8')
+
         return render(request, 'info_device.html', {
             'this_device': this_device,
+            'qr_base64': qr_base64,
         })
+
     else:
         return redirect('login')
 

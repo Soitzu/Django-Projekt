@@ -27,5 +27,5 @@ def deleteTodo(request, pk):
     except Todo.DoesNotExist:
         raise Http404
 
-    todo.delete()  # Das Todo-Objekt wird gelöscht
+    todo.delete()
     return Response(status=204)

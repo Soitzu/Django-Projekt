@@ -33,7 +33,7 @@
             <label for="device">Device:</label>
         </h2>
         <select name="device" class="form-select form-select-md" aria-label=".form-select-sm example">
-            <option selected value="nothing">Open to select Status</option>
+            <option selected value="nothing">Open to select Device</option>
             {% for x in all_devices %}
             <option value="{{ x.model }}">{{ x.model }} | {{ x.serialnumber}}</option>
             {% endfor %}

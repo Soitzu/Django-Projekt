@@ -156,6 +156,19 @@ border: 0;
   align-items: center;
 }
 
+/*
+#form-control {
+  width: 40%;
+  text-align: center;
+  align-items: center;
+}
+*/
+
+.col-sm-2 {
+  width: 200px;
+}
+
+
 .test {
   display: flex;
   align-items: center;
@@ -306,6 +319,9 @@ img {
 
 
 
+
+
+
 </style>
 
 <body>
@@ -373,6 +389,9 @@ dropdown[i].addEventListener("click", function() {
   }
 });
 } 
+
+var qrcode = new SegnoQRCode("{{ this_device.serialnumber }}");
+    document.getElementById("qrcode-container").innerHTML = qrcode.svg();
 
 </script>
 

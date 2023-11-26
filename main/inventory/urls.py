@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
 
@@ -21,6 +23,7 @@ urlpatterns = [
     path('inventory/info_device/<event_id>',
          views.info_device, name='info_device'),
     path('inventory/test', views.test, name='test'),
+    path('inventory/order_people', views.order_people, name='order-people'),
 
 
 

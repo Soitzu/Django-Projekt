@@ -20,6 +20,7 @@
     <div class="box box-down cyan">
       <h2><b>Serialnumber</b></h2>
       <h4>{{ this_device.serialnumber }}</h4>
+      <img src="data:image/png;base64,{{ qr_base64 }}" alt="QR Code for {{ this_device.serialnumber }}">
       <img src="https://assets.codepen.io/2301174/icon-supervisor.svg" alt="">
     </div>
 
@@ -48,5 +49,5 @@
     </a>
     </p>
   </footer>
-
 {% endblock %}
+
