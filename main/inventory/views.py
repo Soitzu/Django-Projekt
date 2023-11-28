@@ -57,15 +57,25 @@ def inventory_home(request):
 
 
 def create_status(request):
-
     if request.user.is_authenticated:
+        all_status = Status.objects.all()
         if request.method == "POST":
             statusname = request.POST['statusname']
             status = Status(statusname=statusname)
             status.save()
             messages.success(request, ("Status successfully saved!"))
 
-        return render(request, 'create_status.html', {})
+        return render(request, 'create_status.html', {
+            'all_status': all_status,
+        })
+    else:
+        return redirect('login')
+    
+def delete_status(request, event_id):
+    if request.user.is_authenticated:
+        this_status = Status.objects.get(pk=event_id)
+        this_status.delete()
+        return redirect('create_status')
     else:
         return redirect('login')
 
@@ -80,11 +90,11 @@ def create_device(request):
             statusname = request.POST['statusname']
             if statusname == 'nothing':
                 messages.success(request, ("Please select a Status!"))
-                return redirect('add_device')
+                return redirect('create_device')
 
             if serialnumber == '' or model == '':
                 messages.success(request, ('Blank spaces arent allowed!'))
-                return redirect('add_device')
+                return redirect('give_device')
 
             status_name = Status.objects.get(statusname=statusname)
             device = Device(model=model, serialnumber=serialnumber,
@@ -262,25 +272,34 @@ def create_people(request):
     if request.user.is_authenticated:
         status = Status.objects.get(statusname="Verfügbar")
         all_devices = Device.objects.filter(status=status)
-        print(status)
-        print(all_devices)
 
         if request.method == "POST":
             fname = request.POST['fname']
             lname = request.POST['lname']
             stnumber = request.POST['stnumber']
             device = request.POST['device']
-            this_device = Device.objects.get(model=device)
 
-            new_person = Person(fname=fname, lname=lname,
-                                stnumber=stnumber, device=this_device)
-            new_person.save()
-            new_status = Status.objects.get(statusname='Vergeben')
-            this_device.status = new_status
-            this_device.save()
+            if device == 'null':
+                device = None
 
-            messages.success(request, ("Person successfully created!"))
-            return redirect('create_people')
+                new_person = Person(fname=fname, lname=lname,
+                                stnumber=stnumber, device=device)
+                new_person.save()
+                messages.success(request, ("Person successfully created!"))
+                return redirect('create_people')
+            else:
+                this_device = Device.objects.get(model=device)
+
+                new_person = Person(fname=fname, lname=lname,
+                                    stnumber=stnumber, device=this_device)
+                new_person.save()
+                new_status = Status.objects.get(statusname='Vergeben')
+                this_device.status = new_status
+                this_device.save()
+
+                messages.success(request, ("Person successfully created!"))
+                return redirect('create_people')
+            
         return render(request, 'create_people.html', {
             'all_devices': all_devices,
         })

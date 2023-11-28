@@ -8,6 +8,7 @@ from . import views
 urlpatterns = [
     path('inventory/', views.inventory_home, name="inventory-home"),
     path('inventory/create_status', views.create_status, name='create_status'),
+    path('inventory/delete_status/<event_id>', views.delete_status, name='delete_status'),
     path('inventory/create_device', views.create_device, name='create_device'),
     path('inventory/all_devices', views.all_devices, name='all_devices'),
     path('inventory/all_devices/<event_id>',

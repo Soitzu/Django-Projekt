@@ -22,4 +22,28 @@
       <button style="margin-top: 20px; width: 100px;" class="btn btn-primary" type="submit" id="button-addon2">Add</button>
     </div>
 </form>
+
+
+    <div class="reports" style="margin-top: 20px;">
+        <table>
+            <tr>
+                <th>Status:</th>
+                <th>Delete:</th>
+            </tr>
+            {% for x in all_status %}
+            <tr>
+                <td>{{ x.statusname }}</td>
+                {% if x.statusname == 'Verfügbar' or x.statusname == 'Vergeben' %}
+                <td><button style="width: 160px;" type="button" class="btn btn-secondary" disabled>Cannot be Deleted</button></td>
+                {% else %}
+                    <td><a href="{% url 'delete_status' x.id %}" style="width: 80px;" type="button" class="btn btn-danger">Delete</a></td>   
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
 {% endblock %}
+
+
