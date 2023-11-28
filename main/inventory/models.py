@@ -12,6 +12,7 @@ class Status(models.Model):
         return self.statusname
 
 
+
 class Device(models.Model):
     model = models.CharField(max_length=50)
     serialnumber = models.CharField(max_length=50)
@@ -20,6 +21,14 @@ class Device(models.Model):
 
     def __str__(self):
         return str(self.date) + " | " + str(self.model) + " | " + str(self.status)
+
+class History(models.Model):
+    date = models.DateField(auto_now_add=True)
+    description = models.CharField(max_length=50)
+    device = models.ForeignKey(Device, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return str(self.date) + ": " + self.device.model
 
 
 class Person(models.Model):
@@ -31,3 +40,5 @@ class Person(models.Model):
 
     def __str__(self):
         return "ST: " + str(self.stnumber) + " | " + str(self.lname) + ", " + str(self.fname)
+
+

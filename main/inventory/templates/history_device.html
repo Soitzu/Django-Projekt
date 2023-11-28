@@ -1,0 +1,23 @@
+{% extends 'inventory-base.html' %}
+
+{% block title %}
+    <title>Device Info</title>
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+<div>
+    <h1>{{ this_device.model }}</h1>
+    {% for x in this_history %}
+    <h3>{{ x.date }}: {{ x.description }}</h3>
+    {% endfor %}
+</div>
+
+
+
+{% endblock %}
+

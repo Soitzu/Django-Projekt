@@ -24,6 +24,7 @@ urlpatterns = [
          views.info_device, name='info_device'),
     path('inventory/test', views.test, name='test'),
     path('inventory/order_people', views.order_people, name='order-people'),
+    path('inventory/history/<event_id>', views.history_device, name='history_device'),
 
 
 

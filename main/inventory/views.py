@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from datetime import date, datetime
 from app.models import Report, Todo
-from .models import Status, Person, Device, User
+from .models import Status, Person, Device, History
 from django.conf import settings
 import mimetypes
 import os
@@ -291,7 +291,6 @@ def create_people(request):
 def info_device(request, event_id):
     if request.user.is_authenticated:
         this_device = Device.objects.get(pk=event_id)
-        print(this_device.serialnumber)
         qrcode = segno.make(this_device.serialnumber)
         qr_bytes = BytesIO()
         # Du kannst hier 'png' durch andere unterstützte Formate ersetzen
@@ -308,6 +307,17 @@ def info_device(request, event_id):
     else:
         return redirect('login')
 
+def history_device(request, event_id):
+    if request.user.is_authenticated:
+        this_device = Device.objects.get(pk=event_id)
+        this_history = History.objects.filter(device_id=event_id)
+
+        return render(request, 'history_device.html', {
+            'this_device': this_device,
+            'this_history': this_history,
+        })
+    else:
+        return redirect('login')
 
 def test(request):
     return render(request, 'test.html', {})
