@@ -1,22 +1,29 @@
 {% extends 'inventory-base.html' %}
 
 {% block title %}
-    <title>Device Info</title>
+    <title>Device History</title>
 {% endblock %}
 
 
 
 {% block content %}
 
+    <h1 style="text-align: center;">{{ this_device.model }}</h1>
 
-
-<div>
-    <h1>{{ this_device.model }}</h1>
-    {% for x in this_history %}
-    <h3>{{ x.date }}: {{ x.description }}</h3>
-    {% endfor %}
+<div class="reports" style="margin-top: 10px;">
+    <table>
+        <tr>
+            <th style="width: 10%;">Datum:</th>
+            <th>Info:</th>
+        </tr>
+        {% for x in this_history %}
+        <tr>
+            <td>{{ x.date }}</td>
+            <td>{{ x.description }}</td>
+        </tr>
+        {% endfor %} 
+    </table>
 </div>
-
 
 
 {% endblock %}
